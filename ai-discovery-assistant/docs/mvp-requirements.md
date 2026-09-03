@@ -1,19 +1,23 @@
 ## Diagram
 
-REQUEST
-   +
-DOCUMENTS (optional)
-        ↓
-   AI ANALYSIS
-        ↓
-┌───────────────────────┐
-│ CLEAR                 │
-│ UNCLEAR / MISSING     │
-│ TOPICS TO EXPLORE     │
-│ QUESTIONS FOR BA      │
-└───────────────────────┘
-        ↓
- CONCISE SUMMARY
+USER
+  ↓
+Business Request + Documents
+  ↓
+PROMPT
+  ↓
+API
+  ↓
+LLM
+  ↓
+STRUCTURED OUTPUT
+  ↓
+APPLICATION
+  ↓
+Clear / Unclear / Missing / Questions
+
+
+
 
 
 ## # MVP Requirements
