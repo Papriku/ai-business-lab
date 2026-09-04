@@ -1,42 +1,11 @@
-from dotenv import load_dotenv
-from google import genai
-from pydantic import BaseModel
-
-load_dotenv()
-
-client = genai.Client()
+from src.discovery import analyze_request
 
 
-class DiscoveryAnalysis(BaseModel):
-    clear: list[str]
-    missing_information: list[str]
-    discovery_questions: list[str]
-    summary: str
+business_request = input("Enter your business request: ")
 
-business_request = """
-We need to improve visibility of inventory across our warehouses.
-Currently, each warehouse uses different spreadsheets and reporting methods.
-Management wants one consistent view of stock levels and inventory movements.
-"""
-response = client.models.generate_content(
-    model="gemini-3.7-flash",
-    contents=f"""
-Analyze this business request:
+analysis = analyze_request(business_request)
 
-{business_request}
-
-Identify what is clear, what information is missing,
-and what questions a Business Analyst should ask during the discovery meeting.
-""",
-    config={
-        "response_mime_type": "application/json",
-        "response_schema": DiscoveryAnalysis,
-    },
-)
-
-analysis = response.parsed
-
-print("CLEAR:")
+print("\nCLEAR:")
 print(analysis.clear)
 
 print("\nMISSING INFORMATION:")
